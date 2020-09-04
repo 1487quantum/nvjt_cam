@@ -14,7 +14,6 @@ By 1487Quantum (https://github.com/1487quantum)
 */
 ```
 
-
 ## Prerequisites
 ### Before we begin...
 Before we begin, we would assume that you would have the following background or attributes:
@@ -59,6 +58,7 @@ A computer with internet connection is required to download and flash the image 
 
 ### Jetson Development Board
 JetPack 4.4 is used for the development board as of the writing of this documentation (03/08/2020). Below are further details of the software (packages):
+
 | Jetpack L4T R33 (Ubuntu 18.04 Bionic Beaver)| OpenCV 3.4.11 | ROS Melodic |
 | :-: | :-: | :-: |
 | <img src="assets/ubu-logo.png" width="300px"> | <img src="assets/cv-logo.png" width="300px"> | <img src="assets/ros-melodic.jpg" width="300px"> |
@@ -67,6 +67,7 @@ JetPack 4.4 is used for the development board as of the writing of this document
 
 ## Jetson Setup
 ### Downloads
+
 Download the image and the flashing program(s) <sup>[1]</sup>:
 - [SDcard Image](https://developer.nvidia.com/jetson-nx-developer-kit-sd-card-image): You'll need to create and sign in into NVIDIA Developer Program to download the image. (It would be in a zip file, for example `nv-jetson-nano-sd-card-image-r32.4.2.zip`.) 
 - [Etcher](https://www.balena.io/etcher/): Download and install _Etcher_ to flash the image into the Jetson Xavier NX.
@@ -88,9 +89,10 @@ Download the image and the flashing program(s) <sup>[1]</sup>:
 
 - The _Flash_ button should be enabled now. Click on the _Flash_ button to begin the flashing process. After the Flashing has been completed, Windows would prompt to format the microSD card. Just click _Cancel_ and eject the microSD card or Card reader from the host computer. The microSD Card is ready to be loaded onto the Xavier NX.
 - Insert the SD card image into the Xavier NX. It is located somewhere in the middle of the Xavier NX module.
+
 | microSD card location | microSD card slot - Side View | Inserting the microSD card |
-| :-: |  :-: |  :-: |
-| <img src="assets/sd-1.png" width="500px">  | <img src="assets/sd-2.jpg" width="500px"> | <img src="assets/sd-3.jpg" width="500px"> |
+| :-: | :-: | :-: |
+| <img src="assets/sd-1.png" width="500px"> | <img src="assets/sd-2.jpg" width="500px"> | <img src="assets/sd-3.jpg" width="500px"> |
 
 - After that, connect all the required peripherals onto the Xavier NX. (Power Supply, Keyboard + Mouse, Display) Power on the Jetson Xavier NX, a green LED near the microUSB port would light up.
 - When the Board is first booted, the Jetson Xavier NX Developer Kit will take you through some initial setup, which includes:
@@ -99,10 +101,13 @@ Download the image and the flashing program(s) <sup>[1]</sup>:
 	- Wireless network Setup
 	- Create username, password, and computer name
 - Once all the setup is done, the board would boot into the system.
+
 ![](assets/nx-boot1.png)
 
 ## Camera Setup
+
 ![](assets/mipi.jpg)
+
 We'll be using the Raspberry Pi Camera v2 (IMX219) CSI cameras that would be attached to the  MIPI ports that are found on the left of the board. There are 2 ports available to be used, which depends on the camera application requirements.
 
 ### Specifications
@@ -129,9 +134,11 @@ Below are the specifications <sup>[3]</sup> of the Raspberry Pi Camera v2, which
 | Focal ratio (F-Stop) | 2.0 |
 
 #### Entaniya Wide Angle Fisheye Lens Adapter
-| | |
+
+| Adapter Kit | FoV |
 | :-: | :-: |
 |![](assets/rpilen_et.jpg) | ![](assets/rpilen_fov.jpg) |
+
 The adapter uses the same RPi camera as mentioned above, the only difference would be the lens configuration <sup>[4]</sup>.
 
 |   | Entaniya Wide Angle Fisheye Lens Adapter |
@@ -421,7 +428,6 @@ We will be using the `omni_proc_ros` package to perform camera calibration and i
 More information on how to setup the package is available [here.](https://github.com/1487quantum/omni_proc_ros.git)
 
 ## Applications
-
 ### vilib_ros wrapper
 
 ![](assets/vilib_ros_track.gif)
@@ -499,30 +505,22 @@ $ rosrun nodelet nodelet manager __name:=manager # Note that manager must be loc
 After that, run the preferred algorithm to be used:
 
 - Nvidia VisionWorks libVX (GPU): `roslaunch gpu_stereo_image_proc vx_stereo_image_proc.launch manager:=/manager __ns:=cam`
-
 - fixstars libSGM (GPU): `roslaunch gpu_stereo_image_proc libsgm_stereo_image_proc.launch manager:=/manager __ns:=cam`
-
 - `sbm` or `sgbm` algorithm (CPU): `roslaunch gpu_stereo_image_proc vx_stereo_image_proc.launch manager:=/manager __ns:=cam`
 
 After that, launch another terminal view the disparity image via `disparity_view`.
-
 ```bash
 $ rosrun image_view disparity_view image:=/cam/disparity
 ```
 
 Open another terminal and launch `rqt_reconfigure`. This would allow one to tune the parameters of the algorithms:
-
 ```bash
 $ rosrun rqt_reconfigure rqt_reconfigure
 ```
 
 The algorithms would publish a few topics, the 2 most commonly used ones are 
-
 - /cam/disparity: The disparity map between the 2 images.
 - /cam/points2: The PointCloud (PCL) obtained via the disparity map.
-
-
-
 
 ### Neven PCL processing
 
@@ -532,14 +530,12 @@ Object segmentation via PCL Euclidean Cluster Extraction, publishes cluster cent
 
 ![](assets/nvn-rviz.png)
 
-
-
 ## References
 
-[1] https://developer.nvidia.com/embedded/learn/get-started-jetson-xavier-nx-devkit
-[2] https://developer.download.nvidia.com/assets/embedded/secure/tools/files/jetpack-sdks/jetpack-4.4-ga/Jetson_Xavier_NX_Developer_Kit_User_Guide.pdf?8tWMbMo8_Y4hG9qZYei-ovmZeb3vauqcKptagrRXooeTRcz-j7JuGEkwQ2RflkxD64YSASjXfKIGOHFnRgFusdE-be31rblZqb2zIsy1UuwiloReJFipOB2qnuMNSrMIcxd5z3zanRgWGELNvfQHrKbft56MJwLiMlj_ylAjkBxcUDzRQjugWGdFBBCLUw0Q1gO0kKsJ2f6_MStlJCLW-sRX-o8B4IFycH5l
-[3] https://www.raspberrypi.org/documentation/hardware/camera/
-[4] https://docs.rs-online.com/7a98/0900766b81618985.pdf
-[5] http://wiki.ros.org/melodic/Installation/Ubuntu
-[6] https://github.com/rbonghi/jetson_stats
-[7] https://github.com/peter-moran/jetson_csi_cam
+- [1] https://developer.nvidia.com/embedded/learn/get-started-jetson-xavier-nx-devkit
+- [2] https://developer.download.nvidia.com/assets/embedded/secure/tools/files/jetpack-sdks/jetpack-4.4-ga/Jetson_Xavier_NX_Developer_Kit_User_Guide.pdf?8tWMbMo8_Y4hG9qZYei-ovmZeb3vauqcKptagrRXooeTRcz-j7JuGEkwQ2RflkxD64YSASjXfKIGOHFnRgFusdE-be31rblZqb2zIsy1UuwiloReJFipOB2qnuMNSrMIcxd5z3zanRgWGELNvfQHrKbft56MJwLiMlj_ylAjkBxcUDzRQjugWGdFBBCLUw0Q1gO0kKsJ2f6_MStlJCLW-sRX-o8B4IFycH5l
+- [3] https://www.raspberrypi.org/documentation/hardware/camera/
+- [4] https://docs.rs-online.com/7a98/0900766b81618985.pdf
+- [5] http://wiki.ros.org/melodic/Installation/Ubuntu
+- [6] https://github.com/rbonghi/jetson_stats
+- [7] https://github.com/peter-moran/jetson_csi_cam
