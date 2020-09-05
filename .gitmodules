@@ -1,0 +1,21 @@
+[submodule "submodules/tools/masker_util"]
+	path = submodules/tools/masker_util
+	url = https://github.com/1487quantum/masker_util
+[submodule "submodules/fisheye/omni_proc_ros"]
+	path = submodules/fisheye/omni_proc_ros
+	url = https://github.com/1487quantum/omni_proc_ros
+[submodule "submodules/gpu_stereo_image_proc"]
+	path = submodules/gpu_stereo_image_proc
+	url = https://github.com/1487quantum/gpu_stereo_image_proc
+[submodule "submodules/vilib_ros"]
+	path = submodules/vilib_ros
+	url = https://github.com/1487quantum/vilib_ros
+[submodule "submodules/neven_pcl_ros"]
+	path = submodules/neven_pcl_ros
+	url = https://github.com/1487quantum/neven_ros
+[submodule "submodules/jetson_csi_cam"]
+	path = submodules/jetson_csi_cam
+	url = https://github.com/1487quantum/jetson_csi_cam
+[submodule "submodules/fisheye/masker_util"]
+	path = submodules/fisheye/masker_util
+	url = https://github.com/1487quantum/masker_util
