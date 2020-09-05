@@ -15,8 +15,13 @@ This repository is made up of 3 parts:
 The organisation of the directory is as follows:
 * fisheye
 	* masker_util
-	*omni_proc_ros
+	* omni_proc_ros
 * gpu_stereo_image_proc
 * jetson_csi_cam
 * neven_pcl_ros
 * vilib_ros
+
+To clone all the submodules, run the following command:
+```bash
+$ git submodule update --init --recursive
+```
