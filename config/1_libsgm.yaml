@@ -1,0 +1,27 @@
+!!python/object/new:dynamic_reconfigure.encoding.Config
+dictitems:
+  P1: 20.0
+  P2: 180.0
+  disparity_range: 256
+  groups: !!python/object/new:dynamic_reconfigure.encoding.Config
+    dictitems:
+      P1: 20.0
+      P2: 180.0
+      disparity_range: 256
+      groups: !!python/object/new:dynamic_reconfigure.encoding.Config
+        state: []
+      id: 0
+      min_disparity: 100
+      name: Default
+      parameters: !!python/object/new:dynamic_reconfigure.encoding.Config
+        state: []
+      parent: 0
+      path_type: 1
+      state: true
+      type: ''
+      uniqueness_ratio: 15.0
+    state: []
+  min_disparity: 100
+  path_type: 1
+  uniqueness_ratio: 15.0
+state: []
